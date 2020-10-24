@@ -41,8 +41,9 @@ function createMap(earthquakes) {
   
     // Loop through the stations array
     quakes.forEach(quake => {
+      var magrad = Math.pow(quake.properties.mag,4.20)*420;
       // For each station, create a marker and bind a popup with the station's name
-      var quakeMarker = L.marker([quake.geometry.coordinates[1], quake.geometry.coordinates[0]])
+      var quakeMarker = L.circle([quake.geometry.coordinates[1], quake.geometry.coordinates[0]],{radius:(magrad)})
         .bindPopup("<h3> Magnitude: " + quake.properties.mag + "</h3>");
   
       // Add the marker to the bikeMarkers array
@@ -51,7 +52,6 @@ function createMap(earthquakes) {
   
     // Create a layer group made from the bike markers array, pass it into the createMap function
     createMap(L.layerGroup(quakemarkers));
-    console.log(quakemarkers);
   }
   
   
